@@ -13,11 +13,12 @@ channel_1        = 1               # ADC Channel 1
 delay            = 1               # Delay between readings
 measurements     = 5               # Number of readings for average value
 
-#var SPI = require('spi');
 
 # Open SPI bus
 spi = spidev.SpiDev()
 spi.open(0,0)
+spi.max_speed_hz = 100000
+
 
 # Function to read SPI data from MCP3002 chip
 # Channel must be an integer 0|1
@@ -32,6 +33,7 @@ def ReadChannel(channel):
     data        += ((adc[1]&31) << 6) + (adc[2] >> 2)
 
     time.sleep(0.2)
+    print("{}".format(i))
 
   data           = float(data) / measurements
   return data

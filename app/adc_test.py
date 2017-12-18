@@ -1,20 +1,28 @@
-from __future__ import division
+#!/usr/bin/python
+
 import spidev
+import time
 
-def bitstring(n):
-    s = bin(n)[2:]
-    return '0'*(8-len(s)) + s
+spi = spidev.SpiDev()
+spi.open(0, 0)
 
-def read(adc_channel=0, spi_channel=0):
-    conn = spidev.SpiDev(0, spi_channel)
-    conn.max_speed_hz = 1200000 # 1.2 MHz
-    cmd = 128
-    if adc_channel:
-        cmd += 32
-    reply_bytes = conn.xfer2([cmd, 0])
-    reply_bitstring = ''.join(bitstring(n) for n in reply_bytes)
-    reply = reply_bitstring[5:15]
-    return int(reply, 2) / 2**10
+def readadc(adcnum):
+    # read SPI data from MCP3008 chip, 8 possible adc's (0 thru 7)
+    if adcnum > 7 or adcnum < 0:
+        return -1
 
-if __name__ == '__main__':
-    print read()
+    # Frame format: 0000 1SCC | C000 000 | 000 000
+    r = spi.xfer2([((adcnum & 6) >> 1)+12 , (adcnum & 1) << 7, 0])
+    adcout = ((r[1] & 15) << 8) + r[2]
+
+    # Read from ADC channels and convert the bits read into the voltage
+    # Divisor changed from 1023 to 4095, due to 4 more bits
+    return (adcout * 3.3) / 4095
+
+while True:
+    # Read all channels
+    for i in range(8):
+        print "%.4f" % (readadc(i)),
+    print ""
+
+time.sleep(0.1)

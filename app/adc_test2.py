@@ -7,8 +7,8 @@ import os
 from time import gmtime, strftime
 
 # Definitions
-channel_0        = 1               # ADC Channel 0
-channel_1        = 0               # ADC Channel 1
+channel_0        = 0               # ADC Channel 0
+channel_1        = 1               # ADC Channel 1
 delay            = 1               # Delay between readings
 measurements     = 5               # Number of readings for average value
 
@@ -16,7 +16,7 @@ measurements     = 5               # Number of readings for average value
 
 # Open SPI bus
 spi = spidev.SpiDev()
-spi.open(0,0)
+spi.open(0,1)
 
 # Function to read SPI data from MCP3002 chip
 # Channel must be an integer 0|1

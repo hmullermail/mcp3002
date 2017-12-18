@@ -16,5 +16,5 @@ WORKDIR /usr/src/app
 COPY ./*.sh /
 
 # run python script when container lands on device
-#CMD ["bash", "start.sh"]
-CMD ["python", "adc_test.py"]
+CMD ["bash", "start.sh"]
+#CMD ["python", "adc_test.py"]

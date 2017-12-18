@@ -26,10 +26,10 @@ def readadc(adcnum, clockpin, mosipin, misopin, cspin):
         if (commandout & 0x80):
             GPIO.output(mosipin, True)
         else:
-              GPIO.output(mosipin, False)
-                commandout <<= 1
-                GPIO.output(clockpin, True)
-                GPIO.output(clockpin, False)
+            GPIO.output(mosipin, False)
+            commandout <<= 1
+            GPIO.output(clockpin, True)
+            GPIO.output(clockpin, False)
  
     adcout = 0
     # read in one empty bit, one null bit and 10 ADC bits

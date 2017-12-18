@@ -12,9 +12,9 @@ def readadc(adcnum, clockpin, mosipin, misopin, cspin):
     if ((adcnum > 1) or (adcnum < 0)):
         return -1
     if (adcnum == 0):
-            commandout = 0x6
-        else:
-            commandout = 0x7
+        commandout = 0x6
+    else:
+        commandout = 0x7
     GPIO.output(cspin, True)
  
     GPIO.output(clockpin, False)  # start clock low

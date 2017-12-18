@@ -13,8 +13,10 @@ delay            = 5               # Delay between readings
 measurements     = 5               # Number of readings for average value
 
 
+var spi = new SPI.Spi("/dev/spidev0.0");
+
 # Open SPI bus
-spi              = spidev.SpiDev()
+#spi              = spidev.SpiDev()
 spi.open(0,0)
 
 # Function to read SPI data from MCP3002 chip

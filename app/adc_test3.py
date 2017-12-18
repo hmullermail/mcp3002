@@ -5,7 +5,9 @@ from time import sleep
 
 DEBUG = 0
 
-spi = spidev.SpiDev()
+var spi = new SPI.Spi("/dev/spidev0.0");
+
+#spi = spidev.SpiDev()
 spi.open(0,0)
 
 def get_adc(channel):

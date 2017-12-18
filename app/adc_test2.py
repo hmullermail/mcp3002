@@ -12,8 +12,9 @@ channel_1        = 1               # ADC Channel 1
 delay            = 5               # Delay between readings
 measurements     = 5               # Number of readings for average value
 
+var SPI = require('spi');
 
-var spi = new SPI.Spi("/dev/spidev0.0");
+var spi = new SPI.Spi("../../../dev/spidev0.0");
 
 # Open SPI bus
 #spi              = spidev.SpiDev()

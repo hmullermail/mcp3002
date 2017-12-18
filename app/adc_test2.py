@@ -7,8 +7,8 @@ import os
 from time import gmtime, strftime
 
 # Definitions
-channel_0        = 0               # ADC Channel 0
-channel_1        = 1               # ADC Channel 1
+channel_0        = 1               # ADC Channel 0
+channel_1        = 0               # ADC Channel 1
 delay            = 1               # Delay between readings
 measurements     = 5               # Number of readings for average value
 

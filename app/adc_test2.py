@@ -4,6 +4,7 @@ import spidev
 import string
 import time
 import os
+import math
 from time import gmtime, strftime
 
 # Definitions
@@ -16,7 +17,7 @@ measurements     = 5               # Number of readings for average value
 
 # Open SPI bus
 spi = spidev.SpiDev()
-spi.open(0,1)
+spi.open(0,0)
 
 # Function to read SPI data from MCP3002 chip
 # Channel must be an integer 0|1

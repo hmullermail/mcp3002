@@ -1,28 +1,71 @@
-#!/usr/bin/python
-
-import spidev
+#!/usr/bin/env python
+ 
+# just some bitbang code for testing the 2 channels
+ 
+import RPi.GPIO as GPIO
 import time
-
-spi = spidev.SpiDev()
-spi.open(0, 0)
-
-def readadc(adcnum):
-    # read SPI data from MCP3008 chip, 8 possible adc's (0 thru 7)
-    if adcnum > 7 or adcnum < 0:
+import os
+ 
+DEBUG = 1
+GPIO.setmode(GPIO.BCM)
+ 
+# read SPI data from MCP3002 chip, 2 possible adc's (0 thru 1)
+def readadc(adcnum, clockpin, mosipin, misopin, cspin):
+    if ((adcnum > 1) or (adcnum < 0)):
         return -1
-
-    # Frame format: 0000 1SCC | C000 000 | 000 000
-    r = spi.xfer2([((adcnum & 6) >> 1)+12 , (adcnum & 1) << 7, 0])
-    adcout = ((r[1] & 15) << 8) + r[2]
-
-    # Read from ADC channels and convert the bits read into the voltage
-    # Divisor changed from 1023 to 4095, due to 4 more bits
-    return (adcout * 3.3) / 4095
-
+    if (adcnum == 0):
+        commandout = 0x6
+    else:
+        commandout = 0x7
+    GPIO.output(cspin, True)
+ 
+    GPIO.output(clockpin, False)  # start clock low
+    GPIO.output(cspin, False)     # bring CS low
+ 
+    #commandout = 0x6  #start bit and 1, 0 to select single ended ch0
+    commandout <<= 5    # we only need to send 3 bits here
+    for i in range(3):
+        if (commandout & 0x80):
+            GPIO.output(mosipin, True)
+        else:
+            GPIO.output(mosipin, False)
+            commandout <<= 1
+            GPIO.output(clockpin, True)
+            GPIO.output(clockpin, False)
+ 
+    adcout = 0
+    # read in one empty bit, one null bit and 10 ADC bits
+    for i in range(12):
+        GPIO.output(clockpin, True)
+        GPIO.output(clockpin, False)
+        adcout <<= 1
+        if (GPIO.input(misopin)):
+            adcout |= 0x1
+ 
+    GPIO.output(cspin, True)
+ 
+    adcout /= 2       # first bit is 'null' so drop it
+    return adcout
+ 
+# change these as desired
+SPICLK = 11
+SPIMOSI = 10
+SPIMISO = 9
+SPICS = 8
+ 
+# set up the SPI interface pins
+GPIO.setup(SPIMOSI, GPIO.OUT)
+GPIO.setup(SPIMISO, GPIO.IN)
+GPIO.setup(SPICLK, GPIO.OUT)
+GPIO.setup(SPICS, GPIO.OUT)
+adcnum = 0
+ 
+# Note that bitbanging SPI is incredibly slow on the Pi as its not
+# a RTOS - reading the ADC takes about 30 ms (~30 samples per second)
+# which is awful for a microcontroller but better-than-nothing for Linux
+ 
 while True:
-    # Read all channels
-    for i in range(8):
-        print "%.4f" % (readadc(i)),
-    print ""
-
-time.sleep(0.1)
+    print "------------"
+    for adcnum in range(2):
+        ret = readadc(adcnum, SPICLK, SPIMOSI, SPIMISO, SPICS)
+        print adcnum, ": ",ret

@@ -2,7 +2,9 @@
  
 # just some bitbang code for testing the 2 channels
  
-import RPi.GPIO as GPIO, time, os
+import RPi.GPIO as GPIO
+import time
+import os
  
 DEBUG = 1
 GPIO.setmode(GPIO.BCM)

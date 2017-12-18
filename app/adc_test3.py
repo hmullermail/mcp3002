@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 import spidev
-import bcm2835
 import string
 import time
 import os
@@ -17,7 +16,7 @@ measurements     = 5               # Number of readings for average value
 
 # Open SPI bus
 spi = spidev.SpiDev()
-spi.open(0,0)
+spi.open(0,1)
 spi.max_speed_hz = 100000
 
 

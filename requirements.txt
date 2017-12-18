@@ -3,5 +3,5 @@ RPi.Gpio
 Flask==0.10.1
 Flask-SQLAlchemy==1.0
 psutil==3.2.2
-#spidev==3.2
+spidev==3.0
 #python-dev

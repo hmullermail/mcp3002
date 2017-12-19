@@ -13,7 +13,7 @@ delay            = 1               # Delay between readings
 measurements     = 5               # Number of readings for average value
 
 SPI = require('spi');
-spi = new SPI.Spi('/dev/spidev0.0', 0, 0);
+spi = new SPI.Spi('../../../dev/spidev0.0', 0, 0);
 
 # Open SPI bus
 # spi = spidev.SpiDev()

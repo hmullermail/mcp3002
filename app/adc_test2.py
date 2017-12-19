@@ -42,7 +42,7 @@ def ReadChannel(channel):
     data         += int(((adc[0]&3) << 8) + adc[1])
     #data        += ((adc[1]&31) << 6) + (adc[2] >> 2)
 
-    time.sleep(0.003)
+    time.sleep(delay)
 
   data           = float(data) / measurements
   return data

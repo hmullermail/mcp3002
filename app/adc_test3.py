@@ -13,7 +13,8 @@ delay            = 1               # Delay between readings
 measurements     = 5               # Number of readings for average value
 
 SPI = require('spi');
-spi = new SPI.Spi('../../../dev/spidev0.0', 0, 0);
+
+#spi = new SPI.Spi('../../../dev/spidev0.0', 0, 0);
 
 # Open SPI bus
 # spi = spidev.SpiDev()
@@ -23,14 +24,16 @@ spi = new SPI.Spi('../../../dev/spidev0.0', 0, 0);
 
 # Function to read SPI data from MCP3002 chip
 # Channel must be an integer 0|1
+
 def ReadChannel(channel):
   data           = 0
   
   for i in range(0,measurements):
-    adc          = spi.xfer2([192,0])
+    #adc          = spi.xfer2([192,0])
     #adc         = spi.xfer2([1,(2+channel)<<6,0])
+    adc = 255
     
-    data         += int(((adc[0]&3) << 8) + adc[1])
+    #data         += int(((adc[0]&3) << 8) + adc[1])
     #data        += ((adc[1]&31) << 6) + (adc[2] >> 2)
 
     time.sleep(0.2)

@@ -17,30 +17,30 @@ measurements     = 5               # Number of readings for average value
 # Open SPI bus
 spi = spidev.SpiDev()
 spi.open(0,0)
-spi.max_speed_hz = 100000
+spi.max_speed_hz = 1200000
 spi.mode = 0
 
-def bitstring(n):
-    s = bin(n)[2:]
-    return '0'*(8-len(s)) + s
-    
 # Function to read SPI data from MCP3002 chip
 # Channel must be an integer 0|1
 def ReadChannel(channel):
   data           = 0
-  cmd = 192
-  if channel:
-    cmd += 32
-  adc = spi.xfer2([cmd, 0])
-  reply_bitstring = ''.join(bitstring(n) for n in adc)
-  reply = reply_bitstring[5:15]
-  spi.close()
-  return int(reply, 2) / 2**10
+  
+  for i in range(0,measurements):
+    #adc          = spi.xfer2([104,0])
+    adc         = spi.xfer2([1,(2+channel)<<6,0])
+    
+    #data         += int(((adc[0]&3) << 8) + adc[1])
+    data        += ((adc[1]&31) << 6) + (adc[2] >> 2)
+
+    time.sleep(0.2)
+
+  data           = float(data) / measurements
+  return data
 
 while True:
   # Read the light sensor data
   level_0 = ReadChannel(channel_0)
-  volts_0 = round((level_0 * 3.33) / float(1024), 2)
+  volts_0 = round((level_0 * 3.3) / float(1023), 2)
 
   # Print out results
   timenow = str(strftime("%Y-%m-%d %H:%M:%S", gmtime()))

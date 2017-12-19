@@ -34,7 +34,6 @@ def ReadChannel(channel):
 
     time.sleep(0.2)
 
-  spi.close()
   data           = float(data) / measurements
   return data
 

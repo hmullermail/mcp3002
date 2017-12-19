@@ -26,7 +26,7 @@ def ReadChannel(channel):
   data           = 0
   
   for i in range(0,measurements):
-    adc          = spi.xfer2([192,0])
+    adc          = spi.xfer2([104,0])
     #adc         = spi.xfer2([1,(2+channel)<<6,0])
     
     data         += int(((adc[0]&3) << 8) + adc[1])

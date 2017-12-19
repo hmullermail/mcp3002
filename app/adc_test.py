@@ -21,5 +21,18 @@ def read(adc_channel=0, spi_channel=0):
     return int(reply, 2) / 2**10
 
 if __name__ == '__main__':
-    print read()
+
+    while True:
+      # Read the light sensor data
+      level_0 = read(channel_0)
+      volts_0 = round((level_0 * 3.3) / float(1023), 2)
+
+      # Print out results
+      timenow = str(strftime("%Y-%m-%d %H:%M:%S", gmtime()))
+      print("{} | {} | {}".format(timenow, level_0, volts_0))
+
+      # Wait before repeating loop
+      time.sleep(delay)
+
+
     

@@ -3,13 +3,13 @@ from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////data/sensorReadings.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////data/LDR_readings.db'
 db = SQLAlchemy(app)
 
 # Declare Model
 class Reading(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    value = db.Column(db.Integer)
+    value = db.Column(db.Float)
     stamp = db.Column(db.DateTime)
 
     def __init__(self, value, stamp=None):

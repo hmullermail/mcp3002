@@ -1,18 +1,27 @@
 #!/usr/bin/python
 
+# python imports
 import spidev
 import string
 import time
 import os
 import math
 from time import gmtime, strftime
+import psutil
+
+# import sqlchemy
+from init import db, Reading
+
+# read environment variables + set defaults
+#interval         = os.getenv('INTERVAL', '20');
+delay            = os.getenv('DELAY', '0.003');       # Delay between readings
+measurements     = os.getenv('MEASUREMENT', '1000');  # Number of readings for average value
 
 # Definitions
 channel_0        = 0               # ADC Channel 0
 channel_1        = 1               # ADC Channel 1
-delay            = 1               # Delay between readings
-measurements     = 5               # Number of readings for average value
-
+#delay            = 0.003               # Delay between readings
+#measurements     = 1000               # Number of readings for average value
 
 # Open SPI bus
 spi = spidev.SpiDev()
@@ -32,11 +41,26 @@ def ReadChannel(channel):
     data         += int(((adc[0]&3) << 8) + adc[1])
     #data        += ((adc[1]&31) << 6) + (adc[2] >> 2)
 
-    time.sleep(0.2)
+    time.sleep(0.003)
 
   data           = float(data) / measurements
   return data
 
+def log():
+  #cpu = psutil.cpu_percent()
+  newLog = Reading(value= volts_0)
+  db.session.add(newLog)
+  db.session.commit()
+  print "LDR value: " + str(volts_0)
+  print str(count_logs()) + " readings have been recorded"
+
+def count_logs():
+  return db.session.query(Reading).count()
+  
+while True:
+    log()
+    #time.sleep(int(interval))
+    
 while True:
   # Read the light sensor data
   level_0 = ReadChannel(channel_0)

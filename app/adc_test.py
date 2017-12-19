@@ -24,8 +24,8 @@ if __name__ == '__main__':
 
     while True:
       # Read the light sensor data
-      level_0 = read(channel_0)
-      volts_0 = round((level_0 * 3.3) / float(1023), 2)
+      level_0 = read()
+      volts_0 = round((level_0 * 3.3)
 
       # Print out results
       timenow = str(strftime("%Y-%m-%d %H:%M:%S", gmtime()))

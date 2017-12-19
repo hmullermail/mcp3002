@@ -14,14 +14,14 @@ from init import db, Reading
 
 # read environment variables + set defaults
 #interval         = os.getenv('INTERVAL', '20');
-#delay            = os.getenv('DELAY', '0.003');       # Delay between readings
-#measurements     = os.getenv('MEASUREMENT', '1000');  # Number of readings for average value
+delay            = float(os.getenv('DELAY', '0.003'));       # Delay between readings
+measurements     = float(os.getenv('MEASUREMENT', '1000'));  # Number of readings for average value
 
 # Definitions
 channel_0        = 0               # ADC Channel 0
 channel_1        = 1               # ADC Channel 1
-delay            = 0.003               # Delay between readings
-measurements     = 1000               # Number of readings for average value
+#delay            = 0.003               # Delay between readings
+#measurements     = 1000               # Number of readings for average value
 volts_0 = 0
 
 # Open SPI bus

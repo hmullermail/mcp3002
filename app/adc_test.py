@@ -1,5 +1,6 @@
 from __future__ import division
 import spidev
+import time
 
 def bitstring(n):
     s = bin(n)[2:]

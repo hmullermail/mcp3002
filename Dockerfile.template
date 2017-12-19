@@ -3,8 +3,6 @@ FROM resin/%%RESIN_MACHINE_NAME%%-python:latest
 #Enable systemd init system in the container
 ENV INITSYSTEM on
 
-RUN apt-get update 
-
 # pip install python deps from requirements.txt
 # For caching until requirements.txt changes
 ADD ./requirements.txt /requirements.txt

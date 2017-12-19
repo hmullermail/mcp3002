@@ -24,19 +24,14 @@ spi.mode = 0
 # Channel must be an integer 0|1
 def ReadChannel(channel):
   data           = 0
-  
-  for i in range(0,measurements):
-    #adc          = spi.xfer2([104,0])
-    adc         = spi.xfer2([1,(2+channel)<<6,0])
-    
-    #data         += int(((adc[0]&3) << 8) + adc[1])
-    data        += ((adc[1]&31) << 6) + (adc[2] >> 2)
-
-    time.sleep(0.2)
-    print("{} | {}".format(i, adc))
-
-  data           = float(data) / measurements
-  return data
+  cmd = 192
+  if channel:
+    cmd += 32
+  adc = spi.xfer2([cmd, 0])
+  reply_bitstring = ''.join(bitstring(n) for n in adc)
+  reply = reply_bitstring[5:15]
+  spi.close()
+  return int(reply, 2) / 2**10
 
 while True:
   # Read the light sensor data

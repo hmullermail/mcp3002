@@ -10,8 +10,8 @@ from time import gmtime, strftime
 # Definitions
 channel_0        = 0               # ADC Channel 0
 channel_1        = 1               # ADC Channel 1
-delay            = 0.2               # Delay between readings
-measurements     = 5               # Number of readings for average value
+delay            = 0.03               # Delay between readings
+measurements     = 10               # Number of readings for average value
 
 
 # Open SPI bus
@@ -32,7 +32,7 @@ def ReadChannel(channel):
     data         += int(((adc[0]&3) << 8) + adc[1])
     #data        += ((adc[1]&31) << 6) + (adc[2] >> 2)
 
-    time.sleep(0.02)
+    time.sleep(0.03)
 
   data           = float(data) / measurements
   return data

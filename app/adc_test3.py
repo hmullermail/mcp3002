@@ -17,7 +17,7 @@ measurements     = 5               # Number of readings for average value
 # Open SPI bus
 spi = spidev.SpiDev()
 spi.open(0,0)
-spi.max_speed_hz = 100000
+spi.max_speed_hz = 1200000
 spi.mode = 0
 
 # Function to read SPI data from MCP3002 chip
@@ -40,7 +40,7 @@ def ReadChannel(channel):
 while True:
   # Read the light sensor data
   level_0 = ReadChannel(channel_0)
-  volts_0 = round((level_0 * 3.33) / float(1024), 2)
+  volts_0 = round((level_0 * 3.3) / float(1023), 2)
 
   # Print out results
   timenow = str(strftime("%Y-%m-%d %H:%M:%S", gmtime()))

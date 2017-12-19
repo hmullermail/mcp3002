@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-import spidev
 import string
 import time
 import os
@@ -13,12 +12,14 @@ channel_1        = 1               # ADC Channel 1
 delay            = 1               # Delay between readings
 measurements     = 5               # Number of readings for average value
 
+SPI = require('spi');
+spi = new SPI.Spi('/dev/spidev0.0', 0, 0);
 
 # Open SPI bus
-spi = spidev.SpiDev()
-spi.open(0,0)
-spi.max_speed_hz = 100000
-spi.mode = 0
+# spi = spidev.SpiDev()
+# spi.open(0,0)
+# spi.max_speed_hz = 100000
+# spi.mode = 0
 
 # Function to read SPI data from MCP3002 chip
 # Channel must be an integer 0|1
@@ -49,3 +50,23 @@ while True:
 
   # Wait before repeating loop
   time.sleep(delay)
+
+
+
+#   var SPI = require('spi');
+ 
+# var spi = new SPI.Spi('/dev/spidev0.0', {
+#     'mode': SPI.MODE['MODE_0'],  // always set mode as the first option 
+#     'chipSelect': SPI.CS['none'] // 'none', 'high' - defaults to low 
+#   }, function(s){s.open();});
+ 
+# var txbuf = new Buffer([ 0x23, 0x48, 0xAF, 0x19, 0x19, 0x19 ]);
+# var rxbuf = new Buffer([ 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 ]);
+ 
+# spi.transfer(txbuf, rxbuf, function(device, buf) {
+#     // rxbuf and buf should be the same here 
+#     var s = "";
+#     for (var i=0; i < buf.length; i++)
+#         s = s + buf[i] + " ";
+#         console.log(s + "- " + new Date().getTime());
+#   });

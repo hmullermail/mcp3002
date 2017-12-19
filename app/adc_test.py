@@ -17,8 +17,9 @@ def read(adc_channel=0, spi_channel=0):
     reply_bytes = conn.xfer2([cmd, 0])
     reply_bitstring = ''.join(bitstring(n) for n in reply_bytes)
     reply = reply_bitstring[5:15]
+    conn.close()
     return int(reply, 2) / 2**10
 
 if __name__ == '__main__':
     print read()
-    conn.close()
+    

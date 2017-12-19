@@ -14,8 +14,8 @@ from init import db, Reading
 
 # read environment variables + set defaults
 #interval         = os.getenv('INTERVAL', '20');
-delay            = os.getenv('DELAY', '0.003');       # Delay between readings
-measurements     = os.getenv('MEASUREMENT', '1000');  # Number of readings for average value
+delay            = os.getenv('DELAY', 0.003);       # Delay between readings
+measurements     = os.getenv('MEASUREMENT', 1000);  # Number of readings for average value
 
 # Definitions
 channel_0        = 0               # ADC Channel 0

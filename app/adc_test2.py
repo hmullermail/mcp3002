@@ -30,6 +30,7 @@ def ReadChannel(channel):
     #adc         = spi.xfer2([1,(2+channel)<<6,0])
     
     data         += int(((adc[0]&3) << 8) + adc[1])
+    #data        += ((adc[1]&31) << 6) + (adc[2] >> 2)
 
     time.sleep(0.2)
 

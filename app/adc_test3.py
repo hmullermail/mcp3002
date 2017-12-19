@@ -32,7 +32,7 @@ def ReadChannel(channel):
     data         += int(((adc[0]&3) << 8) + adc[1])
     #data        += ((adc[1]&31) << 6) + (adc[2] >> 2)
 
-    time.sleep(0.2)
+    time.sleep(0.02)
 
   data           = float(data) / measurements
   return data
@@ -40,7 +40,7 @@ def ReadChannel(channel):
 while True:
   # Read the light sensor data
   level_0 = ReadChannel(channel_0)
-  volts_0 = round((level_0 * 3.3) / float(1023), 2)
+  volts_0 = round((level_0 * 3.3) / float(1023), 3)
 
   # Print out results
   timenow = str(strftime("%Y-%m-%d %H:%M:%S", gmtime()))

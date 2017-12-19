@@ -11,7 +11,7 @@ from time import gmtime, strftime
 channel_0        = 0               # ADC Channel 0
 channel_1        = 1               # ADC Channel 1
 delay            = 0.003               # Delay between readings
-measurements     = 100               # Number of readings for average value
+measurements     = 1000               # Number of readings for average value
 
 
 # Open SPI bus

@@ -18,4 +18,4 @@ COPY ./*.sh /
 # run python script when container lands on device
 #CMD ["bash", "../../../start.sh"]
 CMD modprobe spi-dev
-CMD python adc_test2.py"
+CMD python adc_test2.py

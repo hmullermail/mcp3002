@@ -33,7 +33,6 @@ def ReadChannel(channel):
     data        += ((adc[1]&31) << 6) + (adc[2] >> 2)
 
     time.sleep(0.2)
-    print("{} | {}".format(i, adc))
 
   data           = float(data) / measurements
   return data

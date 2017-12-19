@@ -20,7 +20,6 @@ spi.open(0,0)
 spi.max_speed_hz = 100000
 spi.mode = 0
 
-
 # Function to read SPI data from MCP3002 chip
 # Channel must be an integer 0|1
 def ReadChannel(channel):

@@ -15,7 +15,7 @@ from init import db, Reading
 # read environment variables + set defaults
 #interval         = os.getenv('INTERVAL', '20');
 delay            = float(os.getenv('DELAY', '0.003'));       # Delay between readings
-measurements     = float(os.getenv('MEASUREMENT', '1000'));  # Number of readings for average value
+measurements     = int(os.getenv('MEASUREMENT', '1000'));  # Number of readings for average value
 
 # Definitions
 channel_0        = 0               # ADC Channel 0
@@ -64,8 +64,8 @@ while True:
   volts_0 = round((level_0 * 3.3) / float(1023), 2)
   log()
   # Print out results
-  timenow = str(strftime("%Y-%m-%d %H:%M:%S", gmtime()))
-  print("{} | {} | {}".format(timenow, level_0, volts_0))
+  #timenow = str(strftime("%Y-%m-%d %H:%M:%S", gmtime()))
+  #print("{} | {} | {}".format(timenow, level_0, volts_0))
 
   # Wait before repeating loop
   time.sleep(delay)

@@ -22,6 +22,7 @@ channel_0        = 0               # ADC Channel 0
 channel_1        = 1               # ADC Channel 1
 #delay            = 0.003               # Delay between readings
 #measurements     = 1000               # Number of readings for average value
+volts_0 = 0
 
 # Open SPI bus
 spi = spidev.SpiDev()
@@ -48,7 +49,7 @@ def ReadChannel(channel):
 
 def log():
   #cpu = psutil.cpu_percent()
-  newLog = Reading(value= volts_0)
+  newLog = Reading(value = volts_0)
   db.session.add(newLog)
   db.session.commit()
   print "LDR value: " + str(volts_0)
@@ -58,14 +59,10 @@ def count_logs():
   return db.session.query(Reading).count()
   
 while True:
-    log()
-    #time.sleep(int(interval))
-    
-while True:
   # Read the light sensor data
   level_0 = ReadChannel(channel_0)
   volts_0 = round((level_0 * 3.3) / float(1023), 2)
-
+  log()
   # Print out results
   timenow = str(strftime("%Y-%m-%d %H:%M:%S", gmtime()))
   print("{} | {} | {}".format(timenow, level_0, volts_0))

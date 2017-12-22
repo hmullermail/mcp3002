@@ -23,11 +23,16 @@ class Reading(db.Model):
 
 db.create_all()
 
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
+# @app.route('/')
+# def hello_world():
+#     return 'Hello World!'
 
-
+@app.route("/")
+def chart():
+    labels = ["January","February","March","April","May","June","July","August"]
+    values = [10,9,8,7,6,4,7,8]
+    return render_template('chart.html', values=values, labels=labels)
+    
 if __name__ == '__main__':
     app.debug = True
     app.run(host='0.0.0.0', port=80)

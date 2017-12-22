@@ -23,7 +23,7 @@ class Reading(db.Model):
     def __repr__(self):
         return '<Post %r>' % self.title
 
-db.create_all()
+#db.create_all()
 
 # @app.route('/')
 # def hello_world():
@@ -32,9 +32,10 @@ db.create_all()
 @app.route("/")
 def chart():
     labels = ["January","February","March","April","May","June","July","August"]
-    values = [10,9,8,7,6,4,7,8]
-    return render_template('chart.html', values=values, labels=labels)
-    
+    values = [10,9,8,7,6,4,7,1.6]
+    return render_template('chart2.html', values=values, labels=labels)
+
 if __name__ == '__main__':
     app.debug = True
+    db.create_all()
     app.run(host='0.0.0.0', port=80)

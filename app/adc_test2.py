@@ -59,10 +59,9 @@ def count_logs():
 
 def reading_logs(points):
   #print str(Reading.query.all())
-  print str(Reading.query.filter_by(id=1))
+  print str(Reading.query.filter_by(id=1).first())
   #print str(Reading.query.filter_by(id=str(points)))
-  print str(Reading.query.filter_by(id=3000))
-  print str(Reading.query.filter_by(id=4000))
+  print str(Reading.query.filter_by(id=4000).first())
 
 #  return db.session.query(Reading).all()
 

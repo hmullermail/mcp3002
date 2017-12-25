@@ -10,7 +10,7 @@ from time import gmtime, strftime
 import psutil
 
 # import sqlchemy
-from init import db, Reading
+from __init__ import db, Reading
 
 # read environment variables + set defaults
 #interval         = os.getenv('INTERVAL', '20');
@@ -62,7 +62,7 @@ def reading_logs(points):
   #print "1." + str(Reading.query.filter_by(Reading_id=10000).first())
   #print str(Reading.query.filter_by(id=str(points)))
   #print "2." + str(Reading.query.filter_by(Reading_value=points).all())
-  print "3." + str(db.session.query(Reading_id).all())
+  print "3." + str(db.session.query(value).all())
 
 #  return db.session.query(Reading).all()
 

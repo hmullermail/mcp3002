@@ -61,7 +61,7 @@ def reading_logs(points):
   #print str(Reading.query.all())
   print str(Reading.query.filter_by(id=1).first())
   #print str(Reading.query.filter_by(id=str(points)))
-  print str(Reading.query.filter_by(id=4000).first())
+  print str(Reading.query.filter_by(id=4000).all())
 
 #  return db.session.query(Reading).all()
 

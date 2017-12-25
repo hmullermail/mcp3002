@@ -35,8 +35,8 @@ def chart():
     values = [10,9,8,7,6,4,7,1.6]
     return render_template('chart2.html', values=values, labels=labels)
 
-if __name__ == '__main__':
-    app.debug = True
-    db.create_all()
-    app.run(host='0.0.0.0', port=80)
+# if __name__ == '__main__':
+#     app.debug = True
+#     db.create_all()
+#     app.run(host='0.0.0.0', port=80)
 

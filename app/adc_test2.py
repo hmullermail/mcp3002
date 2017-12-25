@@ -10,7 +10,7 @@ from time import gmtime, strftime
 import psutil
 
 # import sqlchemy
-from __init__ import db, Reading
+from __init__ import db, Reading, value, stamp
 
 # read environment variables + set defaults
 #interval         = os.getenv('INTERVAL', '20');

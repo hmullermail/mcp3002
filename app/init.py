@@ -22,7 +22,7 @@ class Reading(db.Model):
 
     def __repr__(self):
         #return '<Value %r>' % self.value
-        return '%r' % self.value
+        return self.value
 
 
 # @app.route('/')

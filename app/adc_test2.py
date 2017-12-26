@@ -61,7 +61,7 @@ def count_logs():
 def reading_logs(points):
   #print str(Reading.query.all())
   read = Reading.query.filter_by(id=points).first()
-  print read
+  print str(read)
 
 while True:
   # Read the light sensor data

@@ -22,12 +22,8 @@ class Reading(db.Model):
 
     def __repr__(self):
         #return '<Value %r>' % self.value
-        return self.value
+        return '%r' % self.value
 
-
-# @app.route('/')
-# def hello_world():
-#     return 'Hello World!'
 
 # @app.route("/")
 # def chart():
@@ -37,6 +33,5 @@ class Reading(db.Model):
 
 # if __name__ == '__main__':
 #     app.debug = True
-#     db.create_all()
 #     app.run(host='0.0.0.0', port=80)
 

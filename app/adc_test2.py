@@ -59,16 +59,16 @@ def count_logs():
   return db.session.query(Reading).count()
 
 def reading_logs(points):
-  #print str(Reading.query.all())
+  print str(Reading.query.all())
   read = Reading.query.filter_by(id=points).first()
-  print str(read)
+  print read
 
 while True:
   # Read the light sensor data
   level_0 = ReadChannel(channel_0)
   volts_0 = round((level_0 * 3.3) / float(1023), 2)
   log()
-  reading_logs(10000)
+  reading_logs(count_logs())
   # Print out results
   #timenow = str(strftime("%Y-%m-%d %H:%M:%S", gmtime()))
   #print("{} | {} | {}".format(timenow, level_0, volts_0))

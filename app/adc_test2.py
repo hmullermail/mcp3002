@@ -56,12 +56,6 @@ def log():
   print "LDR value: " + str(volts_0) + " - " + str(count_logs()) + " readings have been recorded"
 
 
-
-def reading_logs(points):
-  #print str(Reading.query.all())
-  read = Reading.query.filter_by(id=points).first()
-  print read
-
 while True:
   # Read the light sensor data
   level_0 = ReadChannel(channel_0)

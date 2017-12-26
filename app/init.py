@@ -28,6 +28,12 @@ def count_logs():
     return db.session.query(Reading).count()
 
 
+def reading_logs(points):
+  #print str(Reading.query.all())
+  read = Reading.query.filter_by(id=points).first()
+  print read
+
+
 # @app.route("/")
 # def chart():
 #     labels = ["January","February","March","April","May","June","July","August"]

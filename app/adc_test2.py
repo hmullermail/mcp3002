@@ -55,11 +55,10 @@ def log():
   db.session.commit()
   print "LDR value: " + str(volts_0) + " - " + str(count_logs()) + " readings have been recorded"
 
-def count_logs():
-  return db.session.query(Reading).count()
+
 
 def reading_logs(points):
-  print str(Reading.query.all())
+  #print str(Reading.query.all())
   read = Reading.query.filter_by(id=points).first()
   print read
 

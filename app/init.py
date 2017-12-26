@@ -23,6 +23,9 @@ class Reading(db.Model):
     def __repr__(self):
         #return '<Value %r>' % self.value
         return '%r' % self.value
+    
+    def count_logs():
+        return db.session.query(Reading).count()
 
 
 # @app.route("/")

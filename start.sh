@@ -1,1 +1,1 @@
-cd /usr/src/app && python __init__.py && python adc_test2.py
+cd /usr/src/app && python init.py && python adc_test2.py

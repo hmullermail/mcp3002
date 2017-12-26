@@ -21,7 +21,7 @@ class Reading(db.Model):
         self.stamp = stamp
 
     def __repr__(self):
-        return '<Post %r>' % self.title
+        return '<Id %r>' % self.id
 
 
 # @app.route('/')

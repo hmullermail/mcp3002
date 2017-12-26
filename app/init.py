@@ -1,7 +1,7 @@
 from datetime import datetime
 from flask import Markup
 from flask import Flask
-from flask import render_template
+
 from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -32,15 +32,3 @@ def reading_logs(points):
   #print str(Reading.query.all())
   read = Reading.query.filter_by(id=points).first()
   print read
-
-
-# @app.route("/")
-# def chart():
-#     labels = ["January","February","March","April","May","June","July","August"]
-#     values = [10,9,8,7,6,4,7,1.6]
-#     return render_template('chart2.html', values=values, labels=labels)
-
-# if __name__ == '__main__':
-#     app.debug = True
-#     app.run(host='0.0.0.0', port=80)
-

@@ -10,7 +10,7 @@ from time import gmtime, strftime
 import psutil
 
 # import sqlchemy
-from init import db, Reading
+from init import db, Reading, count_logs
 
 db.create_all()
 # read environment variables + set defaults

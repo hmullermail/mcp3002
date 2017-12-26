@@ -10,8 +10,9 @@ from time import gmtime, strftime
 import psutil
 
 # import sqlchemy
-from __init__ import db, Reading, value, stamp
+from init import db, Reading
 
+db.create_all()
 # read environment variables + set defaults
 #interval         = os.getenv('INTERVAL', '20');
 delay            = float(os.getenv('DELAY', '0.003'));       # Delay between readings
@@ -59,12 +60,8 @@ def count_logs():
 
 def reading_logs(points):
   #print str(Reading.query.all())
-  #print "1." + str(Reading.query.filter_by(Reading_id=10000).first())
-  #print str(Reading.query.filter_by(id=str(points)))
-  #print "2." + str(Reading.query.filter_by(Reading_value=points).all())
-  print "3." + str(db.session.query(value).all())
-
-#  return db.session.query(Reading).all()
+  read = Reading.query.filter_by(id=10000).first()
+  print read
 
 while True:
   # Read the light sensor data

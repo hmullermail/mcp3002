@@ -3,7 +3,7 @@ import psutil
 import os 
 import time
 # import sqlchemy
-from __init__ import db, Reading
+from init import db, Reading
 
 # read environment variables + set defaults
 interval = os.getenv('INTERVAL', '20');
